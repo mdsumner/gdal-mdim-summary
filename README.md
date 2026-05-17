@@ -203,6 +203,17 @@ Groups (8):
   GDAL's `indexing_variable` field is the source of truth.
 - **`h5dump`** shows raw HDF5 hierarchy but no semantic structure (and
   doesn't work on netCDF-3 or Zarr).
+- **R's [tidync](https://github.com/ropensci/tidync)** arrived at the
+  dim-signature-grouping pattern years before either xarray or this script,
+  and within its scope its repr is sharper than ours in several ways
+  (notably the `D0,D4` short-ID notation for grids, which scales beautifully
+  to files with many variables on a few shared grids). tidync is purpose-built
+  for interactive slicing and netCDF, where mdim-summary is purpose-built for
+  static description across everything GDAL multidim can read. Different
+  tools, different scope — but both lean on the same core insight that
+  arrays partition naturally by which dims they live on, and that surfacing
+  that partition is more useful than declaration order. Worth knowing about
+  if you work in R; the two complement each other.
 
 This script is a thin presentation layer over `gdal mdim info`. The JSON
 remains the contract; this is just a way to read it.
@@ -231,9 +242,16 @@ This script is essentially a prototype of what could become a built-in
 subcommand. The layout uses only metadata GDAL already exposes; the
 formatting is the entire contribution.
 
-If you find it useful and have thoughts on what a richer built-in
-version should do, the issues tab on this repo is a good place to
-collect them. A formal GDAL feature request will likely follow once
+There's also room for a complementary **compact form** along the lines of
+tidync's `D0,D4` grid notation, where dims get short IDs and the
+data-variables block collapses to grid-keyed variable lists. That form
+scales much better than the current per-array column layout on files with
+many variables on a few shared grids. It's a different mode rather than a
+replacement, and would likely live as a sibling script or a flag.
+
+If you find the current form useful and have thoughts on what a richer
+built-in version should do, the issues tab on this repo is a good place
+to collect them. A formal GDAL feature request will likely follow once
 the layout has been exercised on enough real files.
 
 ## License
