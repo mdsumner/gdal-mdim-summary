@@ -203,10 +203,10 @@ Groups (8):
   GDAL's `indexing_variable` field is the source of truth.
 - **`h5dump`** shows raw HDF5 hierarchy but no semantic structure (and
   doesn't work on netCDF-3 or Zarr).
-- **R's [tidync](https://github.com/ropensci/tidync)** arrived at the
-  dim-signature-grouping pattern years before either xarray or this script,
+- **R's [tidync](https://github.com/ropensci/tidync)** also arrived at the
+  dim-signature-grouping pattern,
   and within its scope its repr is sharper than ours in several ways
-  (notably the `D0,D4` short-ID notation for grids, which scales beautifully
+  (notably the `D0,D4` short-ID notation for grids, which scales
   to files with many variables on a few shared grids). tidync is purpose-built
   for interactive slicing and netCDF, where mdim-summary is purpose-built for
   static description across everything GDAL multidim can read. Different
