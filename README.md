@@ -203,17 +203,13 @@ Groups (8):
   GDAL's `indexing_variable` field is the source of truth.
 - **`h5dump`** shows raw HDF5 hierarchy but no semantic structure (and
   doesn't work on netCDF-3 or Zarr).
-- **R's [tidync](https://github.com/ropensci/tidync)** also arrived at the
+- **R's [tidync](https://github.com/ropensci/tidync)** print uses
   dim-signature-grouping pattern,
-  and within its scope its repr is sharper than ours in several ways
-  (notably the `D0,D4` short-ID notation for grids, which scales
-  to files with many variables on a few shared grids). tidync is purpose-built
+  with `D0,D4` short-ID notation for grids, which scales
+  to files with many variables. tidync is purpose-built
   for interactive slicing and netCDF, where mdim-summary is purpose-built for
-  static description across everything GDAL multidim can read. Different
-  tools, different scope — but both lean on the same core insight that
-  arrays partition naturally by which dims they live on, and that surfacing
-  that partition is more useful than declaration order. Worth knowing about
-  if you work in R; the two complement each other.
+  static description across everything GDAL multidim can read. Arrays partition naturally by which dims they live on, and that surfacing
+  that partition is more useful than declaration order (`ncdump -h ` 🤢).
 
 This script is a thin presentation layer over `gdal mdim info`. The JSON
 remains the contract; this is just a way to read it.
