@@ -1,5 +1,11 @@
 # gdal-mdim-summary
 
+> **Now part of [gdal-kit](https://github.com/mdsumner/gdal-kit)**, alongside
+> `gdalcaps` (a compact GDAL build summary), with an installable
+> `mdim-summary` wrapper. This repo stays as is, and the curl install below
+> keeps working. Note that from GDAL 3.14, `gdal mdim info` prints text by
+> default, so pipe `gdal mdim info --format=json FILE` into the script.
+
 A one-file `jq` script that turns the JSON output of `gdal mdim info` into a
 human-readable summary, inspired by xarray's `Dataset` repr but driven by
 GDAL's own structural metadata: dimension types, indexing variables, group
